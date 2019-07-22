@@ -8,7 +8,7 @@ use Spawned;
 use Data::Dumper;
 use IPC::SpawnShared;
 
-my $o = Spawned->new;
+my $o = Spawned->new(1234);
 $o->add;
 $o->add;
 $o->add;
@@ -25,4 +25,4 @@ $o->end(1);
 
 sleep 1;
 
-IPC::SpawnShared->unspawn;
+IPC::SpawnShared->unspawn(1234, 1);

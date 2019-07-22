@@ -6,8 +6,8 @@ use strict;
 use IPC::SpawnShared;
 
 sub new {
-    my ($class) = @_;
-    my $hv = IPC::SpawnShared->spawn;
+    my ($class, $glue) = @_;
+    my $hv = IPC::SpawnShared->spawn($glue);
     $hv->{end} = 0;
     return bless $hv, $class;
 }
