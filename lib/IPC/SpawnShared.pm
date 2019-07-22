@@ -3,6 +3,7 @@ package IPC::SpawnShared;
 use strict;
 use warnings;
 
+use Carp qw(croak confess);
 use IPC::Shareable;
 
 our $VERSION = '0.01';
@@ -10,22 +11,29 @@ our $VERSION = '0.01';
 my %h;
 
 sub spawn {
+    my ($class, $glue) = @_;
+
+    croak "spawn() requires 'glue' param sent in" if ! defined $glue;
+
     return \%h if %h;
-    _init();
+    _init($glue);
     return \%h;
 }
 sub unspawn {
-    IPC::Shareable->unspawn(1234, 1);
+    my ($class, $glue) = @_;
+    IPC::Shareable->unspawn($glue, 1);
+    IPC::Shareable->clean_up_all;
 }
 sub _init {
+    my ($glue) = @_;
+
     IPC::Shareable->spawn(
-        key    => '1234',
+        key    => $glue,
         create => 1,
-        delete => 1,
     );
 
     sleep 1;
-    tie %h, 'IPC::Shareable', 1234;
+    tie %h, 'IPC::Shareable', $glue;
 }
 
 1;
