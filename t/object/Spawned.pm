@@ -2,9 +2,7 @@ package Spawned;
 
 use warnings;
 use strict;
-use feature 'say';
 
-use Data::Dumper;
 use IPC::SpawnShared;
 
 sub new {
