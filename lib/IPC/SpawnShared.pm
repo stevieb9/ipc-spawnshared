@@ -5,6 +5,8 @@ use warnings;
 
 use IPC::Shareable;
 
+our $VERSION = '0.01';
+
 my %h;
 
 sub spawn {
@@ -31,16 +33,8 @@ __END__
 
 =head1 NAME
 
-IPC::SpawnShared - The great new IPC::SpawnShared!
-
-=head1 VERSION
-
-Version 0.01
-
-=cut
-
-our $VERSION = '0.01';
-
+IPC::SpawnShared - Sends a shared memory variable maintainer process into the
+background
 
 =head1 SYNOPSIS
 
